@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.util.Arrays;
 
 public class Palette {
 	private Color[] colors;
@@ -16,19 +17,21 @@ public class Palette {
 	}
 	
 	public boolean equals(Object obj) {
-		if (obj instanceof Palette) {
-			Palette p = (Palette) obj;
-			if (this.colors.length != p.colors.length) {
+		// If obj is not a null and it is in the same class. 
+		// ignore that someone forgets to write new equal method in the 
+		//sub class. 
+		if(obj!= null && obj.getClass()==this.getClass())
+		{
+			if(!this.name.equals(obj))
+			{
 				return false;
 			}
-			if (!this.name.equals(p.name)) {
+			
+			if(!Arrays.equals(this.colors, ((Palette)obj).colors))
+			{
 				return false;
 			}
-			for (int i = 0; i < p.colors.length; i++) {
-				if (!p.colors[i].equals(this.colors[i])) {
-					return false;
-				}
-			}
+			
 			return true;
 		}
 		return false;
